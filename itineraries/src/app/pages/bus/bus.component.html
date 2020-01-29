@@ -9,11 +9,15 @@
             <h1 class="text-center">Itinerários de ônibus</h1>
 
             <h1> {{texto}}</h1>
-            <agm-map *ngIf="coordenate.length !== 0" [latitude]="-30.09143556198" [longitude]="-51.178003153111 ">
+            <!-- <agm-map *ngIf="coordenate.length !== 0" [latitude]="-30.09143556198" [longitude]="-51.178003153111 ">
               <agm-direction  *ngFor="let coord of coordenate;let i = index" [travelMode]="'DRIVING'" [origin]="coord['origin']" [transitOptions]="transitOptions" [destination]="coord['destination']">
               </agm-direction>
-            </agm-map>
+            </agm-map> -->
 
+           <app-direction-map *ngIf="steps" [steps]="steps">
+
+           </app-direction-map>
+           <h3>Lista de linhas</h3>
             <div class="list-group">
               <li class="list-group-item list-group-item-action" (click)="searchItinierarie(item.id)"
                 *ngFor="let item of allLines | async as list">

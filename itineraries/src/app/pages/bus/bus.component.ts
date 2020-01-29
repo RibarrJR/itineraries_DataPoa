@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ItinerariesService } from 'src/app/services/itineraries.service';
-import { LatLng } from '@agm/core';
-import { google, LatLngLiteral } from '@agm/core/services/google-maps-types';
+import { LatLngLiteral } from '@agm/core/services/google-maps-types';
+import { Cardinate } from 'src/app/models/googleMaps.model';
+import { HttpResponse } from '@angular/common/http';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-bus',
@@ -12,18 +14,7 @@ export class BusComponent implements OnInit {
 
   public allLines;
 
-  public lat = 24.799448;
-  public lng = 120.979021;
-
-  public coordenate: Array<Cardinate> = [];
-
-  public transitOptions: any = {
-    departureTime: new Date('2018/05/20 13:14'),
-    arrivalTime: new Date('2018/05/20 13:30'),
-    modes: ['BUS'],
-}
-
-
+  public steps = new BehaviorSubject<LatLngLiteral[]>([]);
 
   constructor(private _request: ItinerariesService) {
 
@@ -38,37 +29,12 @@ export class BusComponent implements OnInit {
 
   searchItinierarie(id: number) {
 
-    this._request.searchitineraries(id).subscribe((itinerarie: Array<LatLngLiteral>) => {
+    this._request.searchitineraries(id).subscribe( coordinate => { if (coordinate !== undefined){
 
-      const coord = Object.values(itinerarie).filter((x: Object) => x.hasOwnProperty('lat'))
+      this.steps.next(coordinate)
 
-      this.coordenate = this.transformCardenate(coord)
+    }})
 
-    }
-    );
-
-
-
-  }
-
-  transformCardenate(coord: Array<LatLngLiteral>): Array<Cardinate> {
-
-    const test = coord.map((itineraries, index): Cardinate => {
-      if(index+1 >= coord.length){
-        return
-      }
-      return {
-        origin : { lat: +coord[index].lat, lng: +coord[index].lng },
-        destination: { lat: +coord[index+1].lat, lng: +coord[index+1].lng },
-      }
-    });
-    test.pop();
-
-    return test;
   }
 }
 
-export interface Cardinate {
-  origin: LatLngLiteral,
-  destination: LatLngLiteral
-};

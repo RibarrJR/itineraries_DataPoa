@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
+import { LatLngLiteral } from '@agm/core';
 
 
 @Injectable({
@@ -33,7 +34,7 @@ export class ItinerariesService {
 
   searchitineraries(id:number) {
     return this._http.get(`http://www.poatransporte.com.br/php/facades/process.php?a=il&p=${+id}`, { headers: this.headers, observe: 'response' }).pipe(
-      map((itinerarie:HttpResponse<object>) => itinerarie.body),
+      map((itinerarie:HttpResponse<Array<LatLngLiteral>>) => itinerarie.body),
       catchError(err => throwError(this.handleError(err)))
     )
 

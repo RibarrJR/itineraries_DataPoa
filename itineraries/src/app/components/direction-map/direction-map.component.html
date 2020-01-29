@@ -1,1 +1,26 @@
-<p>direction-map works!</p>
+<agm-map [latitude]="-30.09143556198" [longitude]="-51.178003153111 ">
+  <agm-direction *ngFor="let stop of listStops|async" [travelMode]="'DRIVING'" [origin]="stop['origin']"
+    [transitOptions]="transitOptions" [destination]="stop['destination']">
+  </agm-direction>
+</agm-map>
+<h3>
+  Trecho Atual
+</h3>
+
+<ul class="list-group list-group-horizontal-lg">
+  <li class="list-group-item" *ngFor="let stop of listStops|async">
+    {{stop|json}}
+  </li>
+</ul>
+<h3>
+  Trecho
+</h3>
+<div>
+
+  <div class="paradas list-group list-group-horizontal-lg ">
+    <button class="list-group-item text-nowrap" (click)="changeDirection(stop.origin,stop.destination,i)"
+      *ngFor="let stop of coordenate ;let i = index" [ngClass]="{'active': i ===stopIndex}">
+      Parada {{i}}
+  </button>
+  </div>
+</div>
