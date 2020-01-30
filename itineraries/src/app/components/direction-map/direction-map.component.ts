@@ -1,36 +1,40 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { LatLngLiteral } from '@agm/core';
 import { Cardinate } from 'src/app/models/googleMaps.model';
-import { Observable, BehaviorSubject, observable } from 'rxjs';
+import { Observable, BehaviorSubject, observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-direction-map',
   templateUrl: './direction-map.component.html',
   styleUrls: ['./direction-map.component.scss']
 })
-export class DirectionMapComponent implements OnInit {
+export class DirectionMapComponent implements OnInit,OnDestroy {
+
   @Input() steps: BehaviorSubject<Array<LatLngLiteral>>;
 
   public coordenate: Array<Cardinate> = [];
   public listStops = new BehaviorSubject<Array<Cardinate>>([]);
 
   public transitOptions: any = {
-    departureTime: new Date('2018/05/20 13:14'),
-    arrivalTime: new Date('2018/05/20 13:30'),
     modes: ['BUS'],
   }
   stops: Cardinate[];
   stopIndex: any;
+  _stepsSubscription: Subscription;
 
   constructor() { }
 
   ngOnInit() {
-    this.steps.subscribe(coordenates => {
-      this.stopIndex=0
+   this._stepsSubscription = this.steps.subscribe(coordenates => {
+      this.stopIndex=''
       if (coordenates !== undefined) {
         this.coordenate = this.transformCoordinate(coordenates)
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this._stepsSubscription.unsubscribe();
   }
 
 
