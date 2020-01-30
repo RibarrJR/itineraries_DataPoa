@@ -14,6 +14,7 @@ import { ListLinesComponent } from './components/list-lines/list-lines.component
 import { SearchListPipe } from './components/list-lines/search-list.pipe';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
     DirectionMapComponent,
     ListLinesComponent,
     SearchListPipe,
+    NavbarComponent,
   ],
   imports: [
     NgbPaginationModule,
