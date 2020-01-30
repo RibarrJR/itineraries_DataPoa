@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ItinerariesService } from 'src/app/services/itineraries.service';
 import { LatLngLiteral } from '@agm/core/services/google-maps-types';
-import { Cardinate } from 'src/app/models/googleMaps.model';
-import { HttpResponse } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-bus',

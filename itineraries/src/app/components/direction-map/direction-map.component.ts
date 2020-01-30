@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { LatLngLiteral } from '@agm/core';
 import { Cardinate } from 'src/app/models/googleMaps.model';
 import { Observable, BehaviorSubject, observable, Subscription } from 'rxjs';
+import { takeUntil, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-direction-map',
@@ -10,10 +11,10 @@ import { Observable, BehaviorSubject, observable, Subscription } from 'rxjs';
 })
 export class DirectionMapComponent implements OnInit,OnDestroy {
 
-  @Input() steps: BehaviorSubject<Array<LatLngLiteral>>;
+  @Input() $steps: Observable<Array<LatLngLiteral>>;
 
   public coordenate: Array<Cardinate> = [];
-  public listStops = new BehaviorSubject<Array<Cardinate>>([]);
+  public _listStops = new BehaviorSubject<Array<Cardinate>>([]);
 
   public transitOptions: any = {
     modes: ['BUS'],
@@ -21,11 +22,19 @@ export class DirectionMapComponent implements OnInit,OnDestroy {
   stops: Cardinate[];
   stopIndex: any;
   _stepsSubscription: Subscription;
+  list: Cardinate[];
 
   constructor() { }
 
   ngOnInit() {
-   this._stepsSubscription = this.steps.subscribe(coordenates => {
+
+    this._listStops.pipe(debounceTime(400),distinctUntilChanged()).subscribe((lines:Array<Cardinate>)=>{
+      if(!!lines){
+        this.list=lines;
+      }
+    })
+
+   this._stepsSubscription = this.$steps.subscribe(coordenates => {
       this.stopIndex=''
       if (coordenates !== undefined) {
         this.coordenate = this.transformCoordinate(coordenates)
@@ -36,9 +45,6 @@ export class DirectionMapComponent implements OnInit,OnDestroy {
   ngOnDestroy(): void {
     this._stepsSubscription.unsubscribe();
   }
-
-
-
 
   transformCoordinate(coordinates: Array<LatLngLiteral>): Array<Cardinate> {
     const LatLng = this.getOnlyCoordinates(coordinates)
@@ -59,7 +65,6 @@ export class DirectionMapComponent implements OnInit,OnDestroy {
       }
     });
     response.pop();
-
     return response;
   }
 
@@ -68,7 +73,7 @@ export class DirectionMapComponent implements OnInit,OnDestroy {
   }
 
   changeDirection(o: LatLngLiteral, d: LatLngLiteral, i, number) {
-    this.listStops.next([{ origin: o, destination: d }])
+    this._listStops.next([{ origin: o, destination: d }])
     this.stopIndex = i;
   }
 

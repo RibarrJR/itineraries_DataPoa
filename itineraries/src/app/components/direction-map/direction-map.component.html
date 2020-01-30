@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-12">
     <agm-map [latitude]="-30.09143556198" [longitude]="-51.178003153111 ">
-      <agm-direction *ngFor="let stop of listStops | async" [travelMode]="'DRIVING'" [origin]="stop['origin']"
+      <agm-direction *ngFor="let stop of list " [travelMode]="'DRIVING'" [origin]="stop['origin']"
         [transitOptions]="transitOptions" [destination]="stop['destination']">
       </agm-direction>
     </agm-map>

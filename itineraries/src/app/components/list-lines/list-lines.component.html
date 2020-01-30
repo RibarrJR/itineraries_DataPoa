@@ -3,17 +3,22 @@
   <i class="fa fa-search icon-search"></i>
 </div>
 
-
 <div class="list-group">
-  <li class="list-group-item list-group-item-action" [ngClass]="{'active': item.id ===selectedId}" (click)="selected(item.id)"
-    *ngFor="let item of ((listLines | async)| searchList:search.value | slice : (page===1?0: (page-1)*pageSize) : pageSize*page)">
+  <li class="list-group-item list-group-item-action" [ngClass]="{'active': item.id ===selectedId}"
+    (click)="selected(item.id)"
+    *ngFor="let item of ((listLines | async) | searchList:search.value | slice : (page===1?0: (page-1)*pageSize) : pageSize*page)">
     [{{item.codigo}}] {{item.nome}}
   </li>
 </div>
+<ngb-pagination *ngIf="listLines | async;else chargedList" class="d-flex justify-content-center p-2" [(page)]="page" [pageSize]="pageSize"
+  [collectionSize]="(listLines|async).length"
+  [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true">
+</ngb-pagination>
+
+<ng-template #chargedList>
 
 
-
-  <ngb-pagination class="d-flex justify-content-center p-2" [(page)]="page" [pageSize]="pageSize" [collectionSize]="+(listLines | async| searchList:search.value).length" [maxSize]="5"
-    [rotate]="true" [ellipses]="false" [boundaryLinks]="true">
-
-  </ngb-pagination>
+  <span>
+    Aguarde enquanto estamos carregando a lista de
+  </span>
+</ng-template>
