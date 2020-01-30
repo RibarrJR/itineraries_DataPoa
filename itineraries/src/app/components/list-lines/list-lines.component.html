@@ -1,24 +1,35 @@
-<div class="form-group">
-  <input [formControl]="search" class="form-control text-center" type="text" placeholder="Pesquise a linha...">
-  <i class="fa fa-search icon-search"></i>
+<div *ngIf="(listLines | async).length;else loading">
+  <div class="form-group">
+    <input [formControl]="search" class="form-control text-center" type="text" placeholder="Pesquise a linha...">
+    <i class="fa fa-search icon-search"></i>
+  </div>
+  <div *ngIf="(listLines|async | searchList:search.value ).length;else chargedList">
+    <div class="list-group">
+      <li class="list-group-item list-group-item-action" [ngClass]="{'active': item.id ===selectedId}"
+        (click)="selected(item.id)"
+        *ngFor="let item of ((listLines | async) | searchList:search.value | slice : (page===1?0: (page-1)*pageSize) : pageSize*page)">
+        [{{item.codigo}}] {{item.nome}}
+      </li>
+    </div>
+    <ngb-pagination class="d-flex justify-content-center p-2" [(page)]="page" [pageSize]="pageSize"
+      [collectionSize]="(listLines|async | searchList:search.value ).length" [maxSize]="5" [rotate]="true"
+      [ellipses]="false" [boundaryLinks]="true">
+    </ngb-pagination>
+  </div>
 </div>
 
-<div class="list-group">
-  <li class="list-group-item list-group-item-action" [ngClass]="{'active': item.id ===selectedId}"
-    (click)="selected(item.id)"
-    *ngFor="let item of ((listLines | async) | searchList:search.value | slice : (page===1?0: (page-1)*pageSize) : pageSize*page)">
-    [{{item.codigo}}] {{item.nome}}
-  </li>
-</div>
-<ngb-pagination *ngIf="listLines | async;else chargedList" class="d-flex justify-content-center p-2" [(page)]="page" [pageSize]="pageSize"
-  [collectionSize]="(listLines|async).length"
-  [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true">
-</ngb-pagination>
+
 
 <ng-template #chargedList>
+  <div class=" col-12 text-center">
+    Desculpe não encontramos a linha com esta(s) palavra(s)
+  </div>
+</ng-template>
 
-
-  <span>
-    Aguarde enquanto estamos carregando a lista de
-  </span>
+<ng-template #loading>
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border " role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
 </ng-template>
