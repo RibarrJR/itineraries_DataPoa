@@ -1,0 +1,16 @@
+<div class="form-group">
+  <input [formControl]="search" class="form-control text-center" type="text" placeholder="Pesquise a linha...">
+  <i class="fa fa-search icon-search"></i>
+</div>
+<!-- {{search}} -->
+<div class="list-group">
+  <li class="list-group-item list-group-item-action" (click)="selected(item.id)"
+    *ngFor="let item of ((listLines | async)| searchList:search.value)">
+    [{{item.codigo}}] {{item.nome}}
+  </li>
+</div>
+
+
+<!-- <ngb-pagination [(page)]="1" [pageSize]="5" [collectionSize]="173">
+
+</ngb-pagination> -->
