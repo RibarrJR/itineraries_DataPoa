@@ -13,12 +13,16 @@ export class ListLinesComponent implements OnInit {
   @Input() listLines: Observable<Lines>
   @Output() selecteLine = new EventEmitter<number>()
   public search = new FormControl();
+  public page:number=0;
+  public pageSize:number=10;
+  public selectedId: number;
   constructor() { }
 
   ngOnInit() {
   }
 
   selected(id: number) {
+    this.selectedId=id;
     this.selecteLine.emit(id);
   }
 
