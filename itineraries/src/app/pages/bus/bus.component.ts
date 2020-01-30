@@ -22,18 +22,14 @@ export class BusComponent implements OnInit {
 
   ngOnInit() {
     this.allLines = this._request.searchAllBusLines();
-    this.getDirection();
   }
 
-  getDirection() { }
-
   searchItinierarie(id: number) {
-
-    this._request.searchitineraries(id).subscribe( coordinate => { if (coordinate !== undefined){
-
-      this.steps.next(coordinate)
-
-    }})
+    this._request.searchitineraries(id).subscribe(coordinate => {
+      if (coordinate !== undefined) {
+        this.steps.next(coordinate)
+      }
+    })
 
   }
 }
