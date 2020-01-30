@@ -10,6 +10,10 @@ import {AgmCoreModule} from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
 import { ItinerariesService } from './services/itineraries.service';
 import { DirectionMapComponent } from './components/direction-map/direction-map.component';
+import { ListLinesComponent } from './components/list-lines/list-lines.component';
+import { SearchListPipe } from './components/list-lines/search-list.pipe';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -18,9 +22,13 @@ import { DirectionMapComponent } from './components/direction-map/direction-map.
     HomeComponent,
     BusComponent,
     DirectionMapComponent,
-
+    ListLinesComponent,
+    SearchListPipe,
   ],
   imports: [
+    NgbPaginationModule,
+    ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     BrowserModule,
     AgmCoreModule.forRoot({
