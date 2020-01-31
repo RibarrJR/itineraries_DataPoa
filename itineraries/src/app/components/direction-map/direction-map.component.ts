@@ -19,10 +19,10 @@ export class DirectionMapComponent implements OnInit,OnDestroy {
   public transitOptions: any = {
     modes: ['BUS'],
   }
-  stops: Cardinate[];
-  stopIndex: any;
-  _stepsSubscription: Subscription;
-  list: Cardinate[];
+  public stopIndex: any;
+  public list: Cardinate[];
+  private stops: Cardinate[];
+  private _stepsSubscription: Subscription;
 
   constructor() { }
 

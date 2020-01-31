@@ -5,11 +5,11 @@
   </div>
   <div *ngIf="(listLines|async | searchList:search.value ).length;else chargedList">
     <div class="list-group">
-      <li class="list-group-item list-group-item-action" [ngClass]="{'active': item.id ===selectedId}"
+      <buttton class="list-group-item list-group-item-action" [ngClass]="{'active': item.id ===selectedId}"
         (click)="selected(item.id)"
         *ngFor="let item of ((listLines | async) | searchList:search.value | slice : (page===1?0: (page-1)*pageSize) : pageSize*page)">
         [{{item.codigo}}] {{item.nome}}
-      </li>
+      </buttton>
     </div>
     <ngb-pagination class="d-flex justify-content-center p-2" [(page)]="page" [pageSize]="pageSize"
       [collectionSize]="(listLines|async | searchList:search.value ).length" [maxSize]="5" [rotate]="true"
