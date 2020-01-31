@@ -17,6 +17,7 @@ export class ItinerariesService {
   }
 
   searchAllBusLines(): Observable<object> {
+    // url usando api http://localhost:3000/onibus
     return this._http.get('http://www.poatransporte.com.br/php/facades/process.php?a=nc&p=%&t=o', { headers: this.headers, observe: 'response' })
       .pipe(
         // delay acrescentado apenas para simular a demora da requisição
@@ -27,6 +28,7 @@ export class ItinerariesService {
   }
 
   searchAllLotacaoLines(): Observable<object> {
+    // url usando api http://localhost:3000/lotacao
     return this._http.get('http://www.poatransporte.com.br/php/facades/process.php?a=nc&p=%&t=l', { headers: this.headers, observe: 'response' })
       .pipe(
         // delay acrescentado apenas para simular a demora da requisição
@@ -37,6 +39,7 @@ export class ItinerariesService {
   }
 
   searchitineraries(id:number) {
+    // url usando api http://http://localhost:3000/itineraries/${+id}
     return this._http.get(`http://www.poatransporte.com.br/php/facades/process.php?a=il&p=${+id}`, { headers: this.headers, observe: 'response' }).pipe(
       switchMap((lines:HttpResponse<Array<LatLngLiteral>>) => of(lines.body)),
       catchError(err => throwError(this.handleError(err)))

@@ -7,7 +7,7 @@
       <div class="jumbotron m-4">
         <div class="row">
           <div class="col-12 ">
-            <h1 class="text-center">Itinerários de Lotação</h1>
+            <h1 class="text-center">Itinerários de lotação</h1>
             <app-direction-map *ngIf="steps" [$steps]="steps"></app-direction-map>
             <h3>Lista de linhas</h3>
             <app-list-lines [$listLines]="allLines" (selecteLine)="searchItinierarie($event)"></app-list-lines>

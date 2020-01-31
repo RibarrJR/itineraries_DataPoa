@@ -1,6 +1,6 @@
 # Itinerários Data Poa
 
-An application that helps users retrace all the path of the bus and minibus line using data retrieved from the DATAPOA API
+An application that helps users retrace the entire route of the bus and minibus line using data obtained from the DATAPOA API
 
 ## Get the Code
 ```

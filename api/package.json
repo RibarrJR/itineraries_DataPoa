@@ -1,0 +1,19 @@
+{
+  "name": "transportes-datapoa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "config/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ernesto Junior Silva Ribarr",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  }
+}

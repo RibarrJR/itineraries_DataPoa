@@ -15,6 +15,7 @@ import { SearchListPipe } from './components/list-lines/search-list.pipe';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { AboutComponent } from './pages/about/about.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     ListLinesComponent,
     SearchListPipe,
     NavbarComponent,
+    AboutComponent,
   ],
   imports: [
     NgbPaginationModule,
