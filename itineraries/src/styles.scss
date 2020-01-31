@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+
+.toast-container .toast{
+  opacity: 1;
+  box-shadow: none
+}
+
+.toast{
+  box-shadow: 0 0 12px #000000 !important;
+  background: black;
+}

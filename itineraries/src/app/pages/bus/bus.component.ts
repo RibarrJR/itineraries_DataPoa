@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ItinerariesService } from 'src/app/services/itineraries.service';
 import { LatLngLiteral } from '@agm/core/services/google-maps-types';
 import { BehaviorSubject } from 'rxjs';
-
 @Component({
   selector: 'app-bus',
   templateUrl: './bus.component.html',
@@ -19,6 +18,7 @@ export class BusComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.allLines = this._request.searchAllBusLines();
   }
 

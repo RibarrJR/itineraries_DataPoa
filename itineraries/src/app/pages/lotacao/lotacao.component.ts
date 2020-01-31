@@ -27,6 +27,8 @@ export class LotacaoComponent implements OnInit {
       if (coordinate !== undefined) {
         this.steps.next(coordinate)
       }
+    },error=>{
+
     })
 
   }

@@ -16,6 +16,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AboutComponent } from './pages/about/about.component';
+import { ToastrModule } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { AboutComponent } from './pages/about/about.component';
     AboutComponent,
   ],
   imports: [
+    CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot() ,
     NgbPaginationModule,
     ReactiveFormsModule,
     FormsModule,
@@ -40,6 +46,7 @@ import { AboutComponent } from './pages/about/about.component';
     }),
     AgmDirectionModule,
     AppRoutingModule,
+
   ],
   providers: [ItinerariesService],
   bootstrap: [AppComponent]
